@@ -1,0 +1,597 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap");
+
+/* Globals */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  /* Dark Shades of PrimaryColor */
+  --primaryShadow-1: #007c76;
+  /* Primary/main Color */
+  --primaryColor: #00b3aa;
+  /* Ligther Shades of Primary Color */
+  --primaryLight: #5ddbd5;
+  /* Darkest Grey - used for Headings */
+  /* Grey Used for Paragraphs */
+  --grey1: #2e2e2e;
+  --grey5: #696969;
+  --grey3: #d3d3d3;
+  --mainWhite: #fff;
+  --fontPrimary: "Mulish", sans-serif;
+  --transition: all 0.25s linear;
+  --spacing: 0.25rem;
+  --borderRad: 0.5rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+body {
+  font-family: var(--fontPrimary);
+  background: var(--mainWhite);
+  color: var(--grey1);
+  line-height: 1.5;
+  font-size: 0.875rem; /*14 px for smaller screen, then query will change*/
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+img:not(.nav-logo) {
+  width: 100%;
+  display: block;
+}
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--spacing);
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 0.875rem;
+}
+p {
+  margin-bottom: 1.25rem;
+}
+/* End Global Styles */
+
+/* Some more Globals */
+.btn {
+  text-transform: uppercase;
+  background: var(--primaryColor);
+  color: #fff;
+  padding: 0.4rem 0.85rem;
+  text-decoration: none;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  /* font-weight: 700; */
+  transition: var(--transition);
+  font-size: 0.9rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.btn:hover {
+  background: var(--primaryLight);
+  color: rgb(63, 63, 63);
+}
+.clearfix::after,
+.clearfix::before {
+  content: "  ";
+  clear: both;
+  display: table;
+}
+.section {
+  padding: 2.5rem 0;
+}
+.section-title h3 {
+  font-family: var(--fontSecondary);
+  color: var(--primaryColor);
+}
+.section-title h2 {
+  text-transform: uppercase;
+}
+.section-title {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+.section-center {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 1170px;
+}
+@media screen and (min-width: 992px) {
+  .section-center {
+    width: 95%;
+  }
+}
+.section-title span {
+  color: var(--primaryColor);
+}
+/* End of Some More Globals */
+
+/* Nav-bar  */
+.nav-logo {
+  width: 4rem;
+}
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 2px 2px 10px #2e2e2e;
+  z-index: 1000;
+}
+.nav-icons {
+  display: none;
+}
+.nav-center {
+  /*Aqui decimos que en pantalla grande no supere dicho tamaño(alineado al resto de la web)*/
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+.nav-header {
+  /*alejamos y centramos vertically el logo y button*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+.nav-toggle {
+  /*Es el boton */
+  background: transparent;
+  border: transparent;
+  font-size: 1.5rem;
+  color: var(--primaryColor);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.nav-toggle:hover {
+  transform: scale(1.2);
+}
+.nav-link {
+  display: block;
+  padding: 1rem 2rem; /*porque estas medidas? porque las comparto con el logo*/
+  letter-spacing: var(--spacing);
+  transition: var(--transition);
+  color: var(--grey1);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.nav-link:hover {
+  /*Efecto que se muevan a la derecha y fondos*/
+  color: #005854;
+  background: #95fffa;
+  padding-left: 2.25rem;
+}
+/* vamos a estilizar la altura de los links de la mobile bar */
+/* Buscamos en pantalla completa el DIV que contienen a todos
+y averiguamos su Height (en este caso es 336px) */
+.nav-links {
+  height: 0; /*De esta manera cualquier cosa superior se oculta*/
+  overflow: hidden; /*Escondemos los links por default*/
+  transition: var(--transition);
+}
+.show-links {
+  /*Clase que se agregará por js para mostrar los links NO SUPERARA LA ALTURA ESTABLECIDA*/
+  height: 336px;
+}
+/*nAV FOR BIG SCREEN*/
+@media screen and (min-width: 992px) {
+  /*Hide toggle*/
+  .nav-bar {
+    padding: 0rem 2rem;
+  }
+  .nav-toggle {
+    display: none;
+  }
+  .nav-links {
+    height: auto;
+    display: flex;
+  }
+  .nav-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /*Centramos vertical*/
+    flex-wrap: wrap;
+  }
+  .nav-header {
+    padding: 0 0;
+  }
+  .nav-link {
+    padding: 0 0;
+    margin-right: 1rem;
+  }
+  .nav-link:hover {
+    padding: 0;
+    color: var(--primaryColor);
+    background: transparent;
+  }
+  .nav-icons {
+    display: flex;
+  }
+  .nav-icon {
+    margin-right: 1rem;
+    color: #00b3aa;
+    font-size: 1.2rem;
+    transition: var(--transition);
+  }
+  .nav-icon:hover {
+    color: var(--primaryLight);
+  }
+}
+/* End Nav-Bar */
+
+/* Hero Section  */
+.hero {
+  min-height: 100vh;
+  background: var(--primaryColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-banner {
+  text-align: center;
+  color: white;
+  padding: 0 3rem;
+}
+.hero-banner h1 {
+  text-transform: uppercase;
+}
+.hero-banner p {
+  max-width: 35rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+.hero-btn {
+  padding: 0.9rem 1.6rem;
+  font-size: 1.25rem;
+  background: white;
+  color: var(--primaryColor);
+}
+.hero-btn:hover {
+  background: transparent;
+  color: #fff;
+  border: 1px solid white;
+}
+@media screen and (min-width: 768px) {
+  .hero {
+    background: linear-gradient(rgba(54, 199, 212, 0.4), rgba(0, 0, 0, 0.7)),
+      url(./Images/imgbg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-banner {
+    padding: 0;
+  }
+  .hero-banner p {
+    max-width: 45rem;
+  }
+}
+/* End   Hero Section */
+/* About Section */
+
+.about-img,
+.about-info {
+  margin-bottom: 2rem;
+}
+.about-info h4 {
+  font-size: 1.5rem;
+}
+.about-img {
+  width: 100%;
+  display: block;
+}
+@media screen and (min-width: 992px) {
+  /*Ponemos Columns Flex para big screen*/
+
+  .about-center {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  /*Rematamos las columnas con estilo*/
+  .about-img,
+  .about-info {
+    flex: 0 0 calc(50% - 2rem);
+    margin-bottom: 0;
+    align-self: center;
+  }
+}
+@media screen and (min-width: 1170px) {
+  .about-img {
+    position: relative;
+  }
+  .about-img::before {
+    content: " ";
+    position: absolute;
+    /* background: red   Dimos color red para trabajarlo nomas*/
+    width: 100%;
+    height: 100%;
+    transform: translate(-1.5rem, -1.5rem);
+    z-index: -1;
+    border: 0.5rem solid var(--primaryColor);
+    box-sizing: border-box; /*Para que sea del mismo size que la img*/
+  }
+}
+/* En About Section */
+/* Services Section */
+.services {
+  background: #d5e9e9;
+}
+.service-item {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.service-icon {
+  background: var(--primaryColor);
+  color: var(--primaryShadow-1);
+  padding: 0.5rem;
+  display: inline-block;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--borderRad);
+}
+.service-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.service-text {
+  max-width: 25rem;
+  margin: 0 auto;
+}
+/* 2 columns */
+@media screen and (min-width: 576px) {
+  .services-center {
+    /*Activa la flex*/
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .service-item {
+    /*Remata la flex*/
+    flex: 0 0 calc(50% - 1rem);
+    margin-bottom: 1rem;
+  }
+}
+/*4 colums 992*/
+@media screen and (min-width: 992px) {
+  .service-item {
+    flex: 0 0 calc(25% - 1rem);
+  }
+}
+
+/*Texto al costado del icono*/
+/* No se veía lindo asi que opte por sacarlo */
+
+/* End Services Section */
+
+/* Tours Section */
+.tour-card {
+  transition: var(--transition);
+  background: #d5e9e9;
+  box-shadow: 0 5px 15px #6a8f8f4b;
+  margin-bottom: 2rem;
+}
+.tour-card:hover {
+  box-shadow: 0 5px 15px #004946ab;
+  transform: scale(1.03);
+}
+/*fecha abajo a la derecha*/
+.tour-img-container {
+  position: relative;
+}
+.tour-img {
+  height: 15rem; /*damos altura*/
+  object-fit: cover; /*arreglamos la distortion*/
+}
+.tour-date {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: var(--primaryShadow-1);
+  margin: 0;
+  color: #1ffff4;
+  text-transform: capitalize;
+  padding: 0.25rem 0.5rem;
+}
+.tour-info {
+  padding: 1.25rem 1.5rem;
+}
+.tour-footer {
+  /*Alineamos los elementos del footer*/
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.tour-footer p {
+  line-height: 0;
+  margin-bottom: 0;
+  text-transform: capitalize;
+  color: var(--primaryColor);
+}
+.tour-btn {
+  text-align: center;
+}
+
+/*Querys para columnas*/
+@media screen and (min-width: 768px) {
+  .featured-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .tour-card {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+@media screen and (min-width: 1170px) {
+  .tour-card {
+    flex: 0 0 calc(25% - 1rem);
+  }
+}
+/* End Tours Section */
+/* Contact Section */
+.contact {
+  background: var(--primaryColor);
+}
+.contact-title {
+  color: white;
+}
+.contact-title p {
+  color: var(--primaryLight);
+}
+.contact-form {
+  display: flex;
+  max-width: 28rem;
+}
+.form-control {
+  flex: 1 1 auto;
+  color: var(--grey5);
+}
+.form-control,
+.btn-submit {
+  padding: 0.35rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 300;
+  letter-spacing: var(--spacing);
+  background: white;
+  text-transform: capitalize;
+  border: transparent;
+}
+.form-control::placeholder {
+  color: inherit;
+}
+.btn-submit {
+  font-family: var(--fontPrimary);
+  margin-left: 0.5rem;
+  background: var(--primaryLight);
+  color: var(--primaryShadow-1);
+  cursor: pointer;
+  transform: var(--transition);
+}
+.btn-submit:hover {
+  background: var(--primaryShadow-1);
+  color: var(--primaryColor);
+}
+@media screen and (min-width: 992px) {
+  .contact-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .contact-form {
+    align-self: flex-start;
+    flex: 1 1 auto;
+    max-width: 100%;
+    padding-left: 2.5rem;
+  }
+}
+
+/* End Contact Section */
+
+/* Gallery */
+.gallery-img-container {
+  position: relative;
+  background: var(--primaryColor);
+}
+.gallery-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: white;
+  opacity: 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.gallery-img {
+  height: 17rem;
+  object-fit: cover;
+  transition: var(--transition);
+}
+.gallery-img-container:hover .gallery-img {
+  opacity: 0.5;
+}
+.gallery-img-container:hover .gallery-icon {
+  opacity: 1;
+}
+@media screen and (min-width: 768px) {
+  .gallery-center {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .gallery-img-container {
+    flex: 0 0 50%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .gallery-img-container {
+    flex: 0 0 25%;
+  }
+}
+/* End of Gallery */
+
+/* Footer */
+.footer {
+  background: #1d5c59;
+  text-align: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.footer-links,
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.footer-links a {
+  color: white;
+  text-transform: capitalize;
+  font-size: 1rem;
+  margin-right: 1rem;
+  letter-spacing: var(--spacing);
+  transition: var(--transition);
+}
+.footer-links a:hover {
+  color: var(--primaryColor);
+}
+.footer-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  color: #8ff5f0;
+  transition: var(--transition);
+}
+.footer-icon:hover {
+  color: var(--primaryColor);
+}
+.copyright {
+  text-transform: capitalize;
+  letter-spacing: var(--spacing);
+  color: white;
+}
+/* End Footer */
