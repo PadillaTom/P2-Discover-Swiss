@@ -1,5 +1,5 @@
 /* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap');
 
 /* Globals */
 * {
@@ -20,7 +20,7 @@
   --grey5: #696969;
   --grey3: #d3d3d3;
   --mainWhite: #fff;
-  --fontPrimary: "Mulish", sans-serif;
+  --fontPrimary: 'Mulish', sans-serif;
   --transition: all 0.25s linear;
   --spacing: 0.25rem;
   --borderRad: 0.5rem;
@@ -92,7 +92,7 @@ p {
 }
 .clearfix::after,
 .clearfix::before {
-  content: "  ";
+  content: '  ';
   clear: both;
   display: table;
 }
@@ -323,7 +323,7 @@ y averiguamos su Height (en este caso es 336px) */
     position: relative;
   }
   .about-img::before {
-    content: " ";
+    content: ' ';
     position: absolute;
     /* background: red   Dimos color red para trabajarlo nomas*/
     width: 100%;
@@ -403,6 +403,7 @@ y averiguamos su Height (en este caso es 336px) */
 }
 .tour-img {
   height: 15rem; /*damos altura*/
+  -o-object-fit: cover;
   object-fit: cover; /*arreglamos la distortion*/
 }
 .tour-date {
@@ -481,6 +482,18 @@ y averiguamos su Height (en este caso es 336px) */
   text-transform: capitalize;
   border: transparent;
 }
+.form-control::-webkit-input-placeholder {
+  color: inherit;
+}
+.form-control::-moz-placeholder {
+  color: inherit;
+}
+.form-control:-ms-input-placeholder {
+  color: inherit;
+}
+.form-control::-ms-input-placeholder {
+  color: inherit;
+}
 .form-control::placeholder {
   color: inherit;
 }
@@ -530,6 +543,7 @@ y averiguamos su Height (en este caso es 336px) */
 }
 .gallery-img {
   height: 17rem;
+  -o-object-fit: cover;
   object-fit: cover;
   transition: var(--transition);
 }
